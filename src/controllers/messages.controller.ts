@@ -7,6 +7,9 @@ import { Types } from 'mongoose';
 import Message from '../models/Message';
 import User from '../models/User';
 
+/**
+ * Create message
+ */
 export const create = async (
   req: IRequest,
   res: Response
@@ -47,10 +50,14 @@ export const listMessages = async (
 
   const filter: ListMessagesPostBody = {};
 
+  // If a createdBy id is sent in the request, then filter the
+  // records by the createdBy field
   if (createdBy != null) {
     filter['createdBy._id'] = Types.ObjectId(createdBy);
   }
 
+  // If a date is sent in the request, then filter the
+  // records by createdAt field
   if (date != null) {
     const datePlus1Day = new Date(date);
     datePlus1Day.setDate(datePlus1Day.getDate() + 1);
@@ -61,6 +68,9 @@ export const listMessages = async (
     };
   }
 
+  // If a search term is sent in the request, then filter the
+  // records by the title, message or the name of the person
+  // that created the message
   if (search != null) {
     const searchTerms = search.split(' ');
 
@@ -97,7 +107,6 @@ export const listMessages = async (
 
     return res.status(200).json(messages);
   } catch (error) {
-    console.log(error);
     return res
       .status(422)
       .json({ message: 'Something went wrong while retrieving the messages' });

@@ -4,7 +4,6 @@
 import { Types } from 'mongoose';
 import passport from 'passport';
 import { Express } from 'express';
-// import { IUser } from '../interfaces/IUser';
 import User from '../models/User';
 
 interface IUser extends Express.User {

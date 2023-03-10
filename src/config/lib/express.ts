@@ -18,6 +18,7 @@ const {
 } = require(`../env/${process.env.NODE_ENV}`);
 
 class Express {
+  // Initialize middlewares
   private initMiddlewares(app: Application): void {
     app.use(express.static(path.join(path.resolve('./'), 'build/public')) as any);
     app.use(express.json() as any);
@@ -27,6 +28,7 @@ class Express {
       }) as any
     );
 
+    // Log requests only on development environment
     if (config.env === 'development') {
       app.use(morgan('dev') as any);
       app.use(
@@ -35,11 +37,19 @@ class Express {
         })
       );
     }
+
+    // Compress the body of the request
     app.use(compression());
+
+    // Security middlewares
     initHelmet(app, helmetConfig);
+
+    // Session and login middlewares
     this.initSession(app);
     app.use(passport.initialize());
     app.use(passport.session());
+
+    // Initialize app routes
     new InitRoutes(app);
   }
 

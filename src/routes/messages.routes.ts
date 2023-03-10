@@ -4,6 +4,7 @@ import {
   getMostRecentMessages,
   listMessages,
 } from '../controllers/messages.controller';
+import { allowAccess } from '../helpers/routes-helper';
 
 class MessagesRouter {
   private router: Router;
@@ -14,9 +15,9 @@ class MessagesRouter {
   }
 
   private routes() {
-    this.router.route('/api/messages').post(create);
-    this.router.route('/api/messages/list').post(listMessages);
-    this.router.route('/api/messages/mostRecent').get(getMostRecentMessages);
+    this.router.route('/api/messages').all(allowAccess).post(create);
+    this.router.route('/api/messages/list').all(allowAccess).post(listMessages);
+    this.router.route('/api/messages/mostRecent').all(allowAccess).get(getMostRecentMessages);
   }
 
   public getRouter() {
