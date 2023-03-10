@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon",
+    "start-dev": "src/index",
     "build": "tsc",
     "start": "node build/",
     "clean": "rm -rf node_modules build",

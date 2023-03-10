@@ -2,15 +2,14 @@ version: '3'
 
 services:
   back:
-    image: node:14
+    build: .
     ports:
-      - '4000:4000'
-      - '4400:4400'
+      - '3000:3000'
     volumes:
       - ./:/usr/src/app
     working_dir: /usr/src/app
     container_name: inlaze_back
-    command: yarn dev
+    command: yarn start
     stdin_open: true # docker run -i
     tty: true # docker run -t
   mongo:

@@ -14,5 +14,5 @@
     "pretty": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "src/interfaces", "*.d.ts"]
+  "exclude": ["node_modules/@types", "src/interfaces", "*.d.ts"]
 }
