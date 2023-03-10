@@ -1,5 +1,9 @@
 import { Router } from 'express';
-import { create } from '../controllers/messages.controller';
+import {
+  create,
+  getMostRecentMessages,
+  listMessages,
+} from '../controllers/messages.controller';
 
 class MessagesRouter {
   private router: Router;
@@ -10,7 +14,9 @@ class MessagesRouter {
   }
 
   private routes() {
-    this.router.post('/api/messages', create);
+    this.router.route('/api/messages').post(create);
+    this.router.route('/api/messages/list').post(listMessages);
+    this.router.route('/api/messages/mostRecent').get(getMostRecentMessages);
   }
 
   public getRouter() {

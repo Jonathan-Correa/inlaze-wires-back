@@ -127,7 +127,7 @@ export const getMostRecentMessages = async (
         },
       },
       { $sort: { createdAt: -1 } },
-      { $limit: 4 },
+      { $limit: 2 },
     ]).exec();
 
     return res.status(200).json(messages);
