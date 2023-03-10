@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  back:
+    image: node:14
+    ports:
+      - '4000:4000'
+      - '4400:4400'
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    container_name: inlaze_back
+    command: yarn dev
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+  mongo:
+    image: mongo:4
+    ports:
+      - '27017:27017'
+    container_name: inlaze_db
